@@ -1,28 +1,33 @@
 name: Python CI
 
-# Trigger the workflow on any push to the main branch or pull request
+# Run the workflow when code is pushed to main,
+# when a pull request targets main,
+# or when you manually click "Run workflow".
 on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
+
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the code from the repository
+      # Step 1: Download the repository code
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
+      # Step 2: Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
 
       # Step 3: Install dependencies
       - name: Install dependencies
